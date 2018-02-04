@@ -2,11 +2,16 @@
 redir_to: https://nexerq.cf/
 ---
 
-<html>
+<!DOCTYPE HTML>
+<html lang="en-US">
 	<head>
+		<meta charset="UTF-8">
 		<title>Redirecting...</title>
 		<meta http-equiv="refresh" content="0; url={{ page.redir_to }}">
 		<link rel="canonical" href="{{ page.redir_to }}" />
+		<script type="text/javascript">
+            window.location.href = "{{ page.redir_to }}";
+        </script>
 	</head>
 	<body>
 		If you are not redirected, click <a href="{{ page.redir_to }}">here</a>.
