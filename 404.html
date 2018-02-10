@@ -15,32 +15,11 @@ permalink: /404.html
 
 			<hr>
 
-			<div id="link_wrapper">JavaScript is not enabled. You must enable JavaScript to be able to view any <b>divert</b>-powered shortlinks!</div>
+			<div id="status">JavaScript is not enabled. You must enable JavaScript to be able to view any <b>divert</b>-powered shortlinks!</div>
 
 
 			<script>
-			;(function() {
-
-			if (!window.nexdivert_show_links || window.location.path !== '/')
-				return (document.getElementById('link_wrapper').innerHTML = 'That divert short link could not be found.');
-
-			// escape
-			window.__escaper = document.createElement('textarea');
-			function escapeHTML(html) {
-			    window.__escaper.textContent = html;
-			    return window.__escaper.innerHTML;
-			}
-
-			// generate links
-			document.getElementById('link_wrapper').innerHTML = '<p>short links:</p><ul id="links"></ul>';
-
-			var output = '';
-			Object.keys(window.nexdivert).forEach(function(shortlink) {
-				output += '<li>' + shortlink + ' &rarr; <input type="text" style="width: 600px;" value="' + escapeHTML(window.nexdivert[shortlink]) + '" readonly>';
-			});
-			document.getElementById('links').innerHTML = output;
-
-			})();
+			(document.getElementById('status').innerHTML = 'That divert short link could not be found.');
 			</script>
 		</div>
 	</body>
