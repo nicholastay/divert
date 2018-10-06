@@ -1,38 +1,45 @@
 'use strict';
 
 const fs = require('fs');
+const path = require('path');
 
 if (process.argv.length < 4)
 	return usage();
 
-if (!fs.existsSync('./redir_links.js'))
-	fs.writeFileSync('./redir_links.js', 'window.nexdivert = {};');
-let raw = fs.readFileSync('./redir_links.js', 'utf8');
-let data = JSON.parse(raw.substring(raw.indexOf('{'), raw.length-1));
-
 if (process.argv[2] === 'add') {
-	if (process.argv[4] && data.hasOwnProperty(process.argv[4]))
+	if (process.argv[4] && fs.existsSync(linkPath(process.argv[4])))
 		return console.log('this short-link already exists!');
 	let code = process.argv[4] || generateRandomName();
-	data[code] = process.argv[3];
+	writeLink(code, process.argv[3]);
 	console.log(`generated short-link: ${code} -> ${process.argv[3]}`);
-	return save();
+	return;
 } else if (process.argv[2] === 'remove') {
-	if (!data.hasOwnProperty(process.argv[3]))
+	let file = linkPath(process.argv[3]);
+	if (!fs.existsSync(file))
 		return console.log('this short-link does not exist!');
-	delete data[process.argv[3]];
-	return save();
+	fs.unlinkSync(file);
+	console.log(`deleted short-link: ${process.argv[3]}`);
+	return;
 } else {
 	return usage();
 }
 
-function save() {
-	fs.writeFileSync('./redir_links.js', `window.nexdivert = ${JSON.stringify(data, null, '\t')};`);
+function writeLink(short, url) {
+	let body = `---
+layout: divert
+redir: ${url}
+---
+`;
+	fs.writeFileSync(linkPath(short), body, 'utf8');
+}
+
+function linkPath(s) {
+	return path.join(__dirname, '_diversions', s + '.md');
 }
 
 function generateRandomName() {
 	let code = Math.random().toString(36).substr(2, 5);
-	while (data.hasOwnProperty(code)) // in the rare case we have the exact same code
+	while (fs.existsSync(linkPath(code))) // in the rare case we have the exact same code
 		code = Math.random().toString(36).substr(2, 5); // generates random 5 character thing
 	return code;
 }

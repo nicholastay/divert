@@ -1,0 +1,4 @@
+collections:
+  diversions:
+    output: true
+    permalink: /:name

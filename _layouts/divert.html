@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Redirecting...</title>
+		<meta http-equiv="refresh" content="0; url={{ page.redir }}">
+		<link rel="canonical" href="{{ page.redir }}" />
+		<script type="text/javascript">
+            window.location.href = "{{ page.redir }}";
+        </script>
+	</head>
+	<body>
+		<h1>divert</h1>
+		<hr>
+		If you are not redirected, please follow <a href="{{ page.redir_to }}">this link</a>.
+	</body>
+</html>

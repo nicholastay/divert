@@ -14,39 +14,29 @@
             window.location.href = "{{ page.redir_to }}";
         </script>
         {% else %}
-        <title>divert v1</title>
-        <script type="text/javascript" src="./redir_links.js?{{site.time | date: '%s%N'}}"></script>
+        <title>divert v1 | listing</title>
         {% endif %}
 	</head>
 	<body>
 		{% if page.redir_to %}
-		If you are not redirected, click <a href="{{ page.redir_to }}">here</a>.
+		If you are not redirected, please follow <a href="{{ page.redir_to }}">this link</a>.
 		{% else %}
 		<div style="font-family: Helvetica, sans-serif; width: 850px; margin-top: 35px;">
 			<h1>divert</h1>
 
 			<hr>
 
-			<div id="link_wrapper">JavaScript is not enabled. You must enable JavaScript to be able to view or list any <b>divert</b>-powered shortlinks!</div>
+			<div id="link_wrapper">
+				<p>short links:</p>
+				<ul id="links">
+					{% for d in site.diversions %}
+						<li>
+							{{ d.code }} &rarr; <input type="text" style="width: 600px;" value="{{ d.redir }}" readonly>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
 		</div>
-
-		<script>
-		// escape
-		window.__escaper = document.createElement('textarea');
-		function escapeHTML(html) {
-		    window.__escaper.textContent = html;
-		    return window.__escaper.innerHTML;
-		}
-
-		// generate links
-		document.getElementById('link_wrapper').innerHTML = '<p>short links:</p><ul id="links"></ul>';
-
-		var output = '';
-		Object.keys(window.nexdivert).forEach(function(shortlink) {
-			output += '<li>' + shortlink + ' &rarr; <input type="text" style="width: 600px;" value="' + escapeHTML(window.nexdivert[shortlink]) + '" readonly>';
-		});
-		document.getElementById('links').innerHTML = output;
-		</script>
 		{% endif %}
 	</body>
 </html>
