@@ -27,6 +27,7 @@ if (process.argv[2] === 'add') {
 function writeLink(short, url) {
 	let body = `---
 layout: divert
+code: ${short}
 redir: ${url}
 ---
 `;

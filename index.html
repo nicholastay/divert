@@ -15,23 +15,30 @@
         </script>
         {% else %}
         <title>divert v1 | listing</title>
+
+        <style>
+        	* {
+        		font-family: Helvetica, sans-serif;
+        	}
+        	a {
+        		color: black;
+        	}
+        </style>
         {% endif %}
 	</head>
 	<body>
+		<h1>divert</h1>
+		<hr>
 		{% if page.redir_to %}
 		If you are not redirected, please follow <a href="{{ page.redir_to }}">this link</a>.
 		{% else %}
-		<div style="font-family: Helvetica, sans-serif; width: 850px; margin-top: 35px;">
-			<h1>divert</h1>
-
-			<hr>
-
+		<div style="width: 850px; margin-top: 35px;">
 			<div id="link_wrapper">
 				<p>short links:</p>
 				<ul id="links">
 					{% for d in site.diversions %}
 						<li>
-							{{ d.code }} &rarr; <input type="text" style="width: 600px;" value="{{ d.redir }}" readonly>
+							<a href="./{{ d.code }}">{{ d.code }}</a> &rarr; <input type="text" style="width: 600px;" value="{{ d.redir }}" readonly>
 						</li>
 					{% endfor %}
 				</ul>
