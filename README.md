@@ -36,4 +36,4 @@ redir_to: <your_own_homepage>
 
 ## License
 
-ISC
+ISC (full text available as `LICENSE` in the root of this repository.)
