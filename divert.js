@@ -3,6 +3,9 @@
 const fs = require('fs');
 const path = require('path');
 
+if (process.argv[2] === 'upgrade')
+	return upgrade();
+
 if (process.argv.length < 4)
 	return usage();
 
@@ -46,8 +49,26 @@ function generateRandomName() {
 }
 
 function usage() {
-	console.log('divert v1 - links helper');
+	console.log('divert v2 - links helper');
 	console.log('usage:')
 	console.log('  $ node divert.js add [url] <vanity link (optional)>');
 	console.log('  $ node divert.js remove [vanity link]');
+	console.log('upgrading from v1? -- $ node divert.js upgrade');
+}
+
+function upgrade() {
+	let old = path.join(__dirname, 'redir_links.js');
+	if (!fs.existsSync(old))
+		return console.log('fatal!: could not find old redir_links.js file to upgrade.');
+
+	let raw = fs.readFileSync(old, 'utf8');
+	let data = JSON.parse(raw.substring(raw.indexOf('{'), raw.length-1));
+
+	for (let k of Object.keys(data))
+	{
+		console.log('upgrading short-link: ' + k);
+		writeLink(k, data[k]);
+	}
+
+	console.log('success! upgraded from v1 to new v2 format. you may now safely delete the redir_links.js file.');
 }
