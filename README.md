@@ -4,6 +4,8 @@ A GitHub pages-powered link shortener.
 
 **New in v2!**: Now no JavaScript required - now harnessing the power of static-site generation through Jekyll as included with GitHub Pages!
 
+**Updating from v1?**: Simply run `node divert.js upgrade` to migrate your old short-links to the new format.
+
 ## Start your own today!
 
 To begin, simply fork this repository (and, optionally, add a CNAME file).
