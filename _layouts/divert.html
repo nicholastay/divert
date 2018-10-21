@@ -1,16 +1,12 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Redirecting... | divert v2</title>
-		<meta http-equiv="refresh" content="0; url={{ page.redir }}">
+		<script>window.location.replace('{{ page.redir }}');</script>
+		<noscript><meta http-equiv="refresh" content="0; url={{ page.redir }}"></noscript>
 		<link rel="canonical" href="{{ page.redir }}" />
-		<script type="text/javascript">
-			window.location.href = "{{ page.redir }}";
-		</script>
+		<title>Redirecting... | divert v2</title>
 	</head>
 	<body>
-		<h1>divert</h1>
-		<hr>
-		If you are not redirected, please follow <a href="{{ page.redir }}">this link</a>.
+		<h1>divert</h1><hr>If you are not redirected, please follow <a href="{{ page.redir }}">this link</a>.
 	</body>
 </html>
